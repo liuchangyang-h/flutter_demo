@@ -32,6 +32,8 @@ dependencies:
   shared_preferences: ^0.5.7+3
   #获取版本信息
   package_info: ^0.4.1
+  #屏幕适配
+  flutter_screenutil: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/base_deploy/base_class.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'base_deploy/base_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -17,10 +18,8 @@ class SpUtil {
   static SharedPreferences token;
   static SharedPreferences userId;
   static SharedPreferences userInfo;
-  static SharedPreferences menuList;
   static SharedPreferences deviceToken;
   static SharedPreferences isHadInstall;
-  static SharedPreferences cityCodel;
 
   static Future<String> getInstance() async {
     userId = await SharedPreferences.getInstance();
@@ -29,13 +28,9 @@ class SpUtil {
 
     token = await SharedPreferences.getInstance();
 
-    menuList = await SharedPreferences.getInstance();
-
     deviceToken = await SharedPreferences.getInstance();
 
     isHadInstall = await SharedPreferences.getInstance();
-
-    cityCodel = await SharedPreferences.getInstance();
   }
 }
 
@@ -74,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    print('看一下字体输出是多少:${ScreenUtil.statusBarHeight}');
 //    setState(() {
 //      // This call to setState tells the Flutter framework that something has
 //      // changed in this State, which causes it to rerun the build method below
@@ -92,6 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    ScreenUtil.init(
+      context,
+      width: BaseClass.screenW,
+      height: BaseClass.screenH,
+      allowFontScaling: false,
+    );
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
