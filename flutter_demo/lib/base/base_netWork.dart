@@ -3,9 +3,9 @@ import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutterdemo/base_deploy/base_class.dart';
 import 'package:package_info/package_info.dart';
 import '../main.dart';
+import 'base_class.dart';
 
 class BaseNetWork {
   /*分页默认起始页*/

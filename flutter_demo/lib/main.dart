@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'base_deploy/base_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'base/base_class.dart';
+import 'controller/navigation.dart';
 
 void main() {
   realRunApp();
@@ -95,10 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
       allowFontScaling: false,
     );
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      appBar: MyAppBar(
+        title: widget.title,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
