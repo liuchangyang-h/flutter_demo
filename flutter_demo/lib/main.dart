@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base/base_class.dart';
 import 'controller/navigation.dart';
+import 'controller/notification.dart';
 
 void main() {
   realRunApp();
@@ -80,6 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
 //      // called again, and so nothing would appear to happen.
 //      _counter++;
 //    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
   }
 
   @override

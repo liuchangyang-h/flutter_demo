@@ -46,3 +46,17 @@ class NotificationBus {
 
   ///定义一个top-level（全局）变量，页面引入该文件后可以直接使用bus
   var notice = new NotificationBus();
+
+/**
+ * 使用示例
+ *
+ *添加（name表示标签名，object表示是回调内容）
+ *notice.add('name', (object){});
+ *
+ * 触发（name表示标签名，object表示是触发内容）
+ * notice.trigger('name','bject');
+ *
+ * 移除（name表示标签名）
+ * notice.delete('name');
+
+ * */
