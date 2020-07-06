@@ -17,7 +17,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.context,
     this.actions,
     this.titleStyle,
-    this.backgroundColor,
+    this.backgroundColor = BaseClass.kMainColor,
     this.backImgName,
     this.isBack: false,
   });
@@ -53,7 +53,7 @@ class _MyAppBarState extends State<MyAppBar> {
           Navigator.of(context).pop();
         },
       ) : null,
-      backgroundColor: BaseClass.kMainColor,
+      backgroundColor: widget.backgroundColor,
       elevation: 0,
 
       bottom: new AppBarBottom(
