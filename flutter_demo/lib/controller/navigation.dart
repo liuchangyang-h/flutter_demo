@@ -10,6 +10,8 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final TextStyle titleStyle;
   final Color backgroundColor;
   final String backImgName;
+  final double backW;
+  final double backH;
   final bool isBack;
   MyAppBar({
     this.bottom,
@@ -19,6 +21,8 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleStyle,
     this.backgroundColor = BaseClass.kMainColor,
     this.backImgName,
+    this.backW = 9.0,
+    this.backH = 15.0,
     this.isBack: false,
   });
   @override
@@ -46,8 +50,8 @@ class _MyAppBarState extends State<MyAppBar> {
       leading: widget.isBack ? FlatButton(
         child: Image(
           image: new AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
-          width: 9,
-          height: 15,
+          width: widget.backW,
+          height: widget.backH,
         ),
         onPressed: () {
           Navigator.of(context).pop();

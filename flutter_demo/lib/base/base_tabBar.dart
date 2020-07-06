@@ -4,12 +4,12 @@ import 'package:flutterdemo/pages/index_page.dart';
 
 import 'base_class.dart';
 
-class base_tabBar extends StatefulWidget {
+class BaseTaBar extends StatefulWidget {
   @override
-  _base_tabBarState createState() => _base_tabBarState();
+  _BaseTaBarState createState() => _BaseTaBarState();
 }
 
-class _base_tabBarState extends State<base_tabBar> {
+class _BaseTaBarState extends State<BaseTaBar> {
 
   int _tabIndex = 0;
   var tabImages;
@@ -36,10 +36,10 @@ class _base_tabBarState extends State<base_tabBar> {
   Text getTabTitle(int curIndex) {
     if (curIndex == _tabIndex) {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: 14.0, color: const Color(0xFF0C60A2)));
+          style: new TextStyle(fontSize: BaseClass.kFont(14), color: BaseClass.kMainColor));
     } else {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: 14.0, color: const Color(0xff515151)));
+          style: new TextStyle(fontSize: BaseClass.kFont(14), color: const Color(0xff515151)));
     }
   }
 
@@ -150,3 +150,4 @@ class _base_tabBarState extends State<base_tabBar> {
     );
   }
 }
+

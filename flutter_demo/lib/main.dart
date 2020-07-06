@@ -12,7 +12,7 @@ void main() {
 }
 
 void realRunApp() async {
-  //必要
+  ///必要
   WidgetsFlutterBinding.ensureInitialized();
   await SpUtil.getInstance();
   runApp(MyApp());
@@ -46,8 +46,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: BaseClass.navigatorKey,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: base_tabBar(),
+      home: BaseTaBar(),
     );
   }
 }
