@@ -300,6 +300,7 @@ class _index_pageState extends State<index_page>
         ),
         onPressed: () {
           print('点击了');
+          urlImages.clear();
           requestImageToken('interact/quickAsk/');
         },
       ),
@@ -517,7 +518,7 @@ class _index_pageState extends State<index_page>
                 if (urlImages.length == fileImages.length) {
                   print('结束');
                   print('打印出来看看网络地址:${urlImages}');
-                  LoadWidget.showInfo(context,message: '上传成功！');
+                  LoadWidget.showSuccess(context,message: '上传成功！');
                 } else {
                   locationImg = locationImg + 1;
                   requestImageToken(dir);
@@ -526,7 +527,7 @@ class _index_pageState extends State<index_page>
                 if (urlImages.length == fileImages.length) {
                   print('结束');
                   print('打印出来看看网络地址:${urlImages}');
-                  LoadWidget.showInfo(context,message: '上传成功！');
+                  LoadWidget.showSuccess(context,message: '上传成功！');
                 } else {
                   locationImg = locationImg + 1;
                   requestImageToken(dir);
