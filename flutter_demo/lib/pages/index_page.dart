@@ -222,7 +222,7 @@ class _index_pageState extends State<index_page>
       );
     } else if (this.type == 3) {
       return Container(
-        margin: const EdgeInsets.only(left: 10.0, bottom: 30),
+        margin: EdgeInsets.only(top: 10, left: 20, right: 20),
         width: MediaQuery.of(context).size.width - 40,
         height: 150,
         child: Stack(

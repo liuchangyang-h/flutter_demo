@@ -13,6 +13,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double backW;
   final double backH;
   final bool isBack;
+  final Color backColors;
   MyAppBar({
     this.bottom,
     this.title,
@@ -24,6 +25,7 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.backW = 9.0,
     this.backH = 15.0,
     this.isBack: false,
+    this.backColors = Colors.white,
   });
   @override
   _MyAppBarState createState() => _MyAppBarState();
@@ -38,9 +40,12 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: new Text(
+      iconTheme: IconThemeData(
+        color: widget.backColors,
+      ),
+      title: Text(
         widget.title ?? 'title',
-        style: widget.titleStyle ?? new TextStyle(
+        style: widget.titleStyle ?? TextStyle(
           color: Colors.white,
           fontSize: BaseClass.kFont(17),
           fontWeight: FontWeight.bold,
@@ -49,7 +54,7 @@ class _MyAppBarState extends State<MyAppBar> {
 
       leading: widget.isBack ? FlatButton(
         child: Image(
-          image: new AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
+          image: AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
           width: widget.backW,
           height: widget.backH,
         ),
@@ -60,7 +65,7 @@ class _MyAppBarState extends State<MyAppBar> {
       backgroundColor: widget.backgroundColor,
       elevation: 0,
 
-      bottom: new AppBarBottom(
+      bottom: AppBarBottom(
         child: widget.bottom,
       ),
       actions: widget.actions,
