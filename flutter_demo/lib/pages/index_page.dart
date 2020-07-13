@@ -8,8 +8,10 @@ import 'package:flutterdemo/base/base_netUrl.dart';
 import 'package:flutterdemo/base/base_netWork.dart';
 import 'package:flutterdemo/controller/loadWidget.dart';
 import 'package:flutterdemo/controller/navigation.dart';
+import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/textField.dart';
 import 'package:flutterdemo/controller/upload_file.dart';
+import 'package:flutterdemo/pages/refresh_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo/photo.dart';
 import 'package:video_player/video_player.dart';
@@ -300,8 +302,9 @@ class _index_pageState extends State<index_page>
         ),
         onPressed: () {
           print('点击了');
-          urlImages.clear();
-          requestImageToken('interact/quickAsk/');
+          RoutePush.push(context, RefreshPage());
+//          urlImages.clear();
+//          requestImageToken('interact/quickAsk/');
         },
       ),
     );
