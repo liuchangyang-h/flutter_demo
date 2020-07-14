@@ -25,7 +25,8 @@ void configLoading() {
     ..indicatorColor = Colors.yellow
     ..textColor = Colors.yellow
     ..maskColor = Colors.blue.withOpacity(0.5)
-    ..userInteractions = false;
+    ///是否交互
+    ..userInteractions = true;
 }
 
 void realRunApp() async {
