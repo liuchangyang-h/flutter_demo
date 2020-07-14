@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterdemo/base/base_class.dart';
 import 'package:flutterdemo/base/base_extend.dart';
 import 'package:flutterdemo/base/base_netUrl.dart';
 import 'package:flutterdemo/base/base_netWork.dart';
-import 'package:flutterdemo/controller/loadWidget.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/textField.dart';
@@ -45,7 +45,6 @@ class _index_pageState extends State<index_page>
   @override
   void initState() {
     super.initState();
-
     ///进啦的时候执行
     ///with AutomaticKeepAliveClientMixin 首页作为底部的tab为了防止每次点击都会加载所以加了这句话
   }
@@ -67,6 +66,8 @@ class _index_pageState extends State<index_page>
                 imageOrVideo(),
                 imageShow(),
                 releaseView(),
+                ///弹出框
+                loadView(),
               ],
             ),
           ),
@@ -310,6 +311,78 @@ class _index_pageState extends State<index_page>
     );
   }
 
+  ///弹出框
+  loadView(){
+    return Container(
+      child: Column(
+        children: <Widget>[
+          //show
+          Container(
+            child: RaisedButton(
+                onPressed: (){
+                  EasyLoading.show();
+                },
+              child: Text(
+                'show',
+              ),
+            ),
+          ),
+          //showProgress
+          Container(
+            child: RaisedButton(
+              onPressed: (){
+                EasyLoading.showProgress(0.3, status: 'downloading...');
+              },
+              child: Text(
+                'downloading',
+              ),
+            ),
+          ),
+          Container(
+            child: RaisedButton(
+              onPressed: (){
+                EasyLoading.showSuccess('Great Success!');
+              },
+              child: Text(
+                'Success',
+              ),
+            ),
+          ),
+          Container(
+            child: RaisedButton(
+              onPressed: (){
+                EasyLoading.showError('Failed with Error');
+              },
+              child: Text(
+                'Error',
+              ),
+            ),
+          ),
+          Container(
+            child: RaisedButton(
+              onPressed: (){
+                EasyLoading.showInfo('Useful Information.');
+              },
+              child: Text(
+                'Information',
+              ),
+            ),
+          ),
+          Container(
+            child: RaisedButton(
+              onPressed: (){
+                EasyLoading.showToast('Toast');
+              },
+              child: Text(
+                'Toast',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   //图片
   List<Widget> getImagesist() {
     List<Widget> widgetList = new List();
@@ -486,14 +559,14 @@ class _index_pageState extends State<index_page>
   publishBtnClick() {
     urlImages.clear();
     if (!BaseExtend.isValue(fileImages)) {
-      LoadWidget.showInfo(context, message: '请选择图片或者视频');
+      EasyLoading.showInfo('请选择图片或者视频');
       return;
     }
   }
 
   //获取token,dio上传图片
   void requestImageToken(String dir) {
-    LoadWidget.showLoading(context);
+    EasyLoading.show();
 
     String filePath = fileImages[locationImg];
 
@@ -521,7 +594,7 @@ class _index_pageState extends State<index_page>
                 if (urlImages.length == fileImages.length) {
                   print('结束');
                   print('打印出来看看网络地址:${urlImages}');
-                  LoadWidget.showSuccess(context,message: '上传成功！');
+                  EasyLoading.showSuccess('上传成功！');
                 } else {
                   locationImg = locationImg + 1;
                   requestImageToken(dir);
@@ -530,7 +603,7 @@ class _index_pageState extends State<index_page>
                 if (urlImages.length == fileImages.length) {
                   print('结束');
                   print('打印出来看看网络地址:${urlImages}');
-                  LoadWidget.showSuccess(context,message: '上传成功！');
+                  EasyLoading.showSuccess('上传成功！');
                 } else {
                   locationImg = locationImg + 1;
                   requestImageToken(dir);
@@ -543,11 +616,11 @@ class _index_pageState extends State<index_page>
             },
           );
         } else {
-          LoadWidget.showInfo(context, message: message);
+          EasyLoading.showInfo(message);
         }
       },
       (error) {
-        LoadWidget.showError(context);
+        EasyLoading.showError('网络请求失败');
       },
     );
   }

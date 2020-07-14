@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'dart:io';
 
-import 'loadWidget.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 
 class UploadFile {
 //签名
@@ -70,7 +71,7 @@ class UploadFile {
     } on DioError catch (error) {
       print('上传失败');
       print(error);
-      LoadWidget.dismiss();
+      EasyLoading.dismiss();
       return errorBlock(error);
     }
   }

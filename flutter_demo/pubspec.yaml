@@ -46,6 +46,8 @@ dependencies:
   photo: ^0.4.8
   #视频
   video_player: ^0.10.11+2
+  #加载框
+  flutter_easyloading: ^1.1.4
 
 dev_dependencies:
   flutter_test:
@@ -75,10 +77,6 @@ flutter:
     - images/tabbar/btn_communication_selected-1.png
     - images/tabbar/btn_me_normal-1.png
     - images/tabbar/btn_me_selected-1.png
-    - images/icon_load_success.png
-    - images/icon_load_info.png
-    - images/icon_load_error.png
-    - images/icon_load_info.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
