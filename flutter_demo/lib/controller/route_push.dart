@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Route {
+class RoutePush {
   /// 设置一次 context 方便后面
   static BuildContext _context;
 

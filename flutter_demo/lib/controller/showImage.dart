@@ -3,12 +3,11 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterdemo/base/base_class.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-
-import 'loadWidget.dart';
 
 class ShowImage extends StatefulWidget {
   //数据源
@@ -131,7 +130,7 @@ class _ShowImageState extends State<ShowImage> {
     if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
       return true;
     } else {
-      LoadWidget.showInfo(context, message: '需要存储权限');
+      EasyLoading.showInfo('需要存储权限');
       return false;
     }
   }
@@ -145,10 +144,10 @@ class _ShowImageState extends State<ShowImage> {
       await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
       print(result);
       if (result) {
-        LoadWidget.showInfo(context, message: '保存成功');
+        EasyLoading.showInfo('保存成功');
         Navigator.of(context).pop();
       } else {
-        LoadWidget.showInfo(context, message: '保存失败');
+        EasyLoading.showInfo('保存失败');
       }
     } else {
       if (await requestPermission()) {
@@ -158,10 +157,10 @@ class _ShowImageState extends State<ShowImage> {
             Uint8List.fromList(response.data));
         print(result);
         if (result.toString().length > 0) {
-          LoadWidget.showInfo(context, message: '保存成功');
+          EasyLoading.showInfo('保存成功');
           Navigator.of(context).pop();
         } else {
-          LoadWidget.showInfo(context, message: '保存失败');
+          EasyLoading.showInfo('保存失败');
         }
       }
     }

@@ -36,9 +36,18 @@ dependencies:
   flutter_screenutil: ^1.1.0
   #动态申请权限
   permission_handler: ^3.0.0
-  #保存图片到本地
-  image_gallery_saver: ^1.2.2
+  #保存图片到本地(ios注意看https://www.jianshu.com/p/a288b33cf03b)
+  image_gallery_saver: ^1.5.0
+  #图片预览放大滑动
   photo_view: ^0.9.2
+  #拍照
+  image_picker: ^0.6.7+4
+  #多图选择
+  photo: ^0.4.8
+  #视频
+  video_player: ^0.10.11+2
+  #加载框
+  flutter_easyloading: ^1.1.4
 
 dev_dependencies:
   flutter_test:
@@ -57,9 +66,17 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - images/tabbar/btn_index_normal-1.png
+    - images/tabbar/btn_index_selected-1.png
+    - images/tabbar/btn_knowledge_normal-1.png
+    - images/tabbar/btn_knowledge_selected.png
+    - images/tabbar/btn_put_normal-1.png
+    - images/tabbar/btn_put_selected-1.png
+    - images/tabbar/btn_communication_normal-1.png
+    - images/tabbar/btn_communication_selected-1.png
+    - images/tabbar/btn_me_normal-1.png
+    - images/tabbar/btn_me_selected-1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
