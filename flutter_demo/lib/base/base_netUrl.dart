@@ -10,7 +10,7 @@ class NetUrl {
 //  static const String kHttp_HostName = "http://47.96.98.193/yanhai-api";
 
   ///测试
-  static const String kHttp_HostName = "http://wiki.njbandou.com/yanhai-api";
+  static const String kHttp_HostName = "https://yanhai.njbandou.com/yanhai-api";
 
   ///农技耘前缀
   ///本地

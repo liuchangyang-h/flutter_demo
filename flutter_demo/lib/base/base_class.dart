@@ -31,8 +31,15 @@ class BaseClass {
   /// 底部安全区
   static double kBottomSafeHeight = mediaQuery.padding.bottom;
 
+  ///字体适配
   static kFont(number) {
     return ScreenUtil().setSp(number);
+  }
+
+  ///关闭键盘
+  static closeKeyBorder() {
+    FocusScope.of(navigatorKey.currentState.overlay.context)
+        .requestFocus(FocusNode());
   }
 
   /// mark ---------------------------------------- App ----------
@@ -83,5 +90,5 @@ class BaseClass {
 
   static final PullToRefreshStyle pullToRefreshStyle = PullToRefreshStyle();
 
- /// mark ---------------------------------------- End ----------
+  /// mark ---------------------------------------- End ----------
 }
