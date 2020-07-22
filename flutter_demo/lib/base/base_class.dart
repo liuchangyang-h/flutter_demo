@@ -32,8 +32,18 @@ class BaseClass {
   static double kBottomSafeHeight = mediaQuery.padding.bottom;
 
   ///字体适配
-  static kFont(number) {
-    return ScreenUtil().setSp(number);
+  static kFont(x) {
+    return ScreenUtil().setSp(x);
+  }
+
+  ///根据UI设计的设备宽度适配
+  static setWidth(x){
+    return ScreenUtil().setWidth(x);
+  }
+
+  ///根据UI设计的设备高度适配
+  static setHeight(x){
+    return ScreenUtil().setHeight(x);
   }
 
   ///关闭键盘

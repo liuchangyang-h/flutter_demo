@@ -30,6 +30,9 @@ class TableViewCell extends StatelessWidget {
   ///是否添加点击事件
   final bool isClick;
 
+  ///图标
+  final IconData icon;
+
   TableViewCell({
     this.callBack,
     this.item,
@@ -38,8 +41,9 @@ class TableViewCell extends StatelessWidget {
     this.height = 44.0,
     this.titleColor = Colors.black,
     this.titleFont = 15,
-    this.arrowColor = Colors.black,
+    this.arrowColor = Colors.grey,
     this.isClick: true,
+    this.icon = Icons.arrow_forward_ios,
   });
 
   @override
@@ -53,7 +57,7 @@ class TableViewCell extends StatelessWidget {
         },
         child: Container(
           width: BaseClass.screenW,
-          height: this.height,
+          height: BaseClass.setHeight(height),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border(
@@ -70,8 +74,8 @@ class TableViewCell extends StatelessWidget {
                       ? Container(
                           margin:
                               EdgeInsets.only(left: 5, top: 10, bottom: 10),
-                          height: height - 10 * 2,
-                          width: height - 10 * 2,
+                          height: BaseClass.setHeight(height - 10 * 2),
+                          width: BaseClass.setWidth(height - 10 * 2),
                           child: Image(
                             image: AssetImage(item['image']),
                             fit: BoxFit.cover,
@@ -97,11 +101,10 @@ class TableViewCell extends StatelessWidget {
                   ? Positioned(
                       right: 10,
                       child: Container(
-                        height: height,
+                        height: BaseClass.setHeight(height),
                         child: Icon(
-                          Icons.keyboard_arrow_right,
+                          icon,
                           color: arrowColor,
-                          size: 30,
                         ),
                       ),
                     )

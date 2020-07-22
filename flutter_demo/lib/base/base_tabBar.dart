@@ -80,11 +80,11 @@ class _BaseTaBarState extends State<BaseTaBar> {
      * 三个子界面
      */
     _pageList = [
-      new index_page(),
-      new index_page(),
-      new index_page(),
-      new index_page(),
-      new index_page(),
+      new IndexPage(),
+      new IndexPage(),
+      new IndexPage(),
+      new IndexPage(),
+      new IndexPage(),
     ];
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutterdemo/base/base_class.dart';
+import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 
 class PromptPage extends StatefulWidget {
@@ -15,10 +15,7 @@ class _PromptPageState extends State<PromptPage> {
       appBar: MyAppBar(
         title: '提示框',
       ),
-      body: Container(
-        height: BaseClass.screenH,
-        width: BaseClass.screenW,
-        color: BaseClass.kBackColor,
+      body: BGContainer(
         child: SingleChildScrollView(
           child: loadView(),
         ),

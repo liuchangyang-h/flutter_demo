@@ -7,6 +7,7 @@ import 'package:flutterdemo/base/base_class.dart';
 import 'package:flutterdemo/base/base_extend.dart';
 import 'package:flutterdemo/base/base_netUrl.dart';
 import 'package:flutterdemo/base/base_netWork.dart';
+import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/upload_file.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +20,6 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-
   VideoPlayerController _videoPlayerController;
 
   ///弹出选择（0默认不选，1表示相机、2表示单图相册、3表示录制视频、4表示多图相册）
@@ -40,9 +40,7 @@ class _UploadPageState extends State<UploadPage> {
       appBar: MyAppBar(
         title: '文件上传',
       ),
-      body: Container(
-        height: BaseClass.screenH,
-        color: BaseClass.kBackColor,
+      body: BGContainer(
         child: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -66,16 +64,16 @@ class _UploadPageState extends State<UploadPage> {
     } else if (this.type == 1) {
       return Container(
         margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-        width: BaseClass.screenW - 40,
-        height: 150,
+        width: BaseClass.setWidth(BaseClass.screenW - 40),
+        height: BaseClass.setHeight(150),
         color: Colors.grey,
         child: Stack(
           children: <Widget>[
             Container(
               child: Image.asset(
                 fileImages[0],
-                width: BaseClass.screenW - 40,
-                height: 150,
+                width: BaseClass.setWidth(BaseClass.screenW - 40),
+                height: BaseClass.setHeight(150),
                 fit: BoxFit.cover,
               ),
             ),
@@ -84,8 +82,8 @@ class _UploadPageState extends State<UploadPage> {
               right: 10,
               child: Container(
                 alignment: Alignment.center,
-                width: 35,
-                height: 30,
+                width: BaseClass.setWidth(35),
+                height: BaseClass.setHeight(30),
                 child: FlatButton(
                   onPressed: () {
                     print('删除');
@@ -107,16 +105,16 @@ class _UploadPageState extends State<UploadPage> {
     } else if (this.type == 2) {
       return Container(
         margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-        width: BaseClass.screenW - 40,
-        height: 150,
+        width: BaseClass.setWidth(BaseClass.screenW - 40),
+        height: BaseClass.setHeight(150),
         color: Colors.grey,
         child: Stack(
           children: <Widget>[
             Container(
               child: Image.asset(
                 fileImages[0],
-                width: BaseClass.screenW - 40,
-                height: 150,
+                width: BaseClass.setWidth(BaseClass.screenW - 40),
+                height: BaseClass.setHeight(150),
                 fit: BoxFit.cover,
               ),
             ),
@@ -125,8 +123,8 @@ class _UploadPageState extends State<UploadPage> {
               right: 10,
               child: Container(
                 alignment: Alignment.center,
-                width: 35,
-                height: 30,
+                width: BaseClass.setWidth(35),
+                height: BaseClass.setHeight(30),
                 child: FlatButton(
                   onPressed: () {
                     print('删除');
@@ -148,13 +146,13 @@ class _UploadPageState extends State<UploadPage> {
     } else if (this.type == 3) {
       return Container(
         margin: EdgeInsets.only(top: 10, left: 20, right: 20),
-        width: MediaQuery.of(context).size.width - 40,
-        height: 150,
+        width: BaseClass.setWidth(BaseClass.screenW - 40),
+        height: BaseClass.setHeight(150),
         child: Stack(
           children: <Widget>[
             Container(
-              width: MediaQuery.of(context).size.width - 40,
-              height: 150,
+              width: BaseClass.setWidth(BaseClass.screenW - 40),
+              height: BaseClass.setHeight(150),
               child: AspectRatio(
                 aspectRatio: _videoPlayerController.value.aspectRatio,
                 child: VideoPlayer(_videoPlayerController),
@@ -165,8 +163,8 @@ class _UploadPageState extends State<UploadPage> {
               right: 10,
               child: Container(
                 alignment: Alignment.center,
-                width: 35,
-                height: 30,
+                width: BaseClass.setWidth(35),
+                height: BaseClass.setHeight(30),
                 child: FlatButton(
                   onPressed: () {
                     print('删除');
@@ -209,7 +207,7 @@ class _UploadPageState extends State<UploadPage> {
   ///拍照、录屏、获取相册
   imageOrVideo() {
     return Container(
-      height: 60,
+      height: BaseClass.setHeight(60),
       margin: EdgeInsets.only(top: 10),
       child: RaisedButton(
         color: BaseClass.kMainColor,
@@ -234,7 +232,7 @@ class _UploadPageState extends State<UploadPage> {
   ///发布
   releaseView() {
     return Container(
-      height: 40,
+      height: BaseClass.setHeight(40),
       margin: EdgeInsets.only(top: 10),
       child: RaisedButton(
         color: BaseClass.kMainColor,
@@ -275,8 +273,8 @@ class _UploadPageState extends State<UploadPage> {
           Container(
             child: Image.asset(
               item,
-              width: 90,
-              height: 90,
+              width: BaseClass.setWidth(90),
+              height: BaseClass.setHeight(90),
               fit: BoxFit.cover,
             ),
           ),
@@ -285,8 +283,8 @@ class _UploadPageState extends State<UploadPage> {
             left: 50,
             child: Container(
               alignment: Alignment.center,
-              width: 35,
-              height: 30,
+              width: BaseClass.setWidth(35),
+              height: BaseClass.setHeight(30),
               child: FlatButton(
                 onPressed: () {
                   print('删除');
@@ -457,12 +455,12 @@ class _UploadPageState extends State<UploadPage> {
             today.day.toString() +
             '/',
       },
-          (int code, String message, Object data) async {
+      (int code, String message, Object data) async {
         if (code == BaseNetWork.kCodeSuccess) {
           UploadFile.requestOssUrl(
             filePath,
             data,
-                (int code, String message, String data) {
+            (int code, String message, String data) {
               if (code == BaseNetWork.kCodeSuccess) {
                 urlImages.add(data);
                 if (urlImages.length == fileImages.length) {
@@ -484,7 +482,7 @@ class _UploadPageState extends State<UploadPage> {
                 }
               }
             },
-                (error) {
+            (error) {
               locationImg = locationImg;
               requestImageToken(dir);
             },
@@ -493,7 +491,7 @@ class _UploadPageState extends State<UploadPage> {
           EasyLoading.showInfo(message);
         }
       },
-          (error) {
+      (error) {
         EasyLoading.showError('网络请求失败');
       },
     );

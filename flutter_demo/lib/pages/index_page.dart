@@ -1,20 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterdemo/base/base_class.dart';
+import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/tableView_cell.dart';
-import 'package:flutterdemo/pages/prompt_page.dart';
-import 'package:flutterdemo/pages/refresh_page.dart';
-import 'package:flutterdemo/pages/textField_page.dart';
-import 'package:flutterdemo/pages/upload_page.dart';
+import 'city_page.dart';
+import 'prompt_page.dart';
+import 'refresh_page.dart';
+import 'textField_page.dart';
+import 'upload_page.dart';
 
-class index_page extends StatefulWidget {
+class IndexPage extends StatefulWidget {
   @override
-  _index_pageState createState() => _index_pageState();
+  _IndexPageState createState() => _IndexPageState();
 }
 
-class _index_pageState extends State<index_page>
+class _IndexPageState extends State<IndexPage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => false;
@@ -33,6 +33,9 @@ class _index_pageState extends State<index_page>
     {
       'title': '拉下刷新',
     },
+    {
+      'title': '城市选择',
+    },
   ];
 
   @override
@@ -49,9 +52,7 @@ class _index_pageState extends State<index_page>
       appBar: MyAppBar(
         title: '首页',
       ),
-      body: Container(
-        height: BaseClass.screenH,
-        color: BaseClass.kBackColor,
+      body: BGContainer(
         child: ListView.builder(
           itemBuilder: (context, index) {
             return TableViewCell(
@@ -69,14 +70,16 @@ class _index_pageState extends State<index_page>
   //回调
   void callBack(index) {
     print('点击了:${index}');
-    if(index == 0){
+    if (index == 0) {
       RoutePush.push(context, TextFieldPage());
-    }else if(index == 1){
+    } else if (index == 1) {
       RoutePush.push(context, UploadPage());
-    }else if(index == 2){
+    } else if (index == 2) {
       RoutePush.push(context, PromptPage());
-    }else if(index == 3){
+    } else if (index == 3) {
       RoutePush.push(context, RefreshPage());
+    } else if (index == 4) {
+      RoutePush.push(context, CityPage());
     }
   }
 }

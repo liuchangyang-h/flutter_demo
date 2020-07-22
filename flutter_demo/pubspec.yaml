@@ -48,6 +48,8 @@ dependencies:
   video_player: ^0.10.11+2
   #加载框
   flutter_easyloading: ^1.1.4
+  #城市选择
+  city_pickers: ^0.1.30
 
 dev_dependencies:
   flutter_test:

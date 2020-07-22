@@ -55,8 +55,8 @@ class _MyAppBarState extends State<MyAppBar> {
       leading: widget.isBack ? FlatButton(
         child: Image(
           image: AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
-          width: widget.backW,
-          height: widget.backH,
+          width: BaseClass.setWidth(widget.backW),
+          height: BaseClass.setHeight(widget.backH),
         ),
         onPressed: () {
           Navigator.of(context).pop();

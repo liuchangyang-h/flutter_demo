@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/base/base_class.dart';
+import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/tableView_cell.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,12 +11,11 @@ class RefreshPage extends StatefulWidget {
 }
 
 class _RefreshPageState extends State<RefreshPage> {
-
   ///自定义int
   int page = 0;
 
   RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   //下拉刷新的方法
   Future<Null> _onListRefresh(BuildContext context) async {
@@ -81,23 +81,17 @@ class _RefreshPageState extends State<RefreshPage> {
   ];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return initView();
-  }
-
-  initView(){
     return Scaffold(
       appBar: MyAppBar(
         title: '页面刷新',
       ),
-      body: Container(
-        height: BaseClass.screenH,
-        color: BaseClass.kBackColor,
+      body: BGContainer(
         child: SmartRefresher(
           enablePullDown: true,
           enablePullUp: true,
@@ -110,19 +104,18 @@ class _RefreshPageState extends State<RefreshPage> {
             itemBuilder: (context, index) {
               return TableViewCell(
                 item: this.dataList[index],
+                isClick: false,
               );
             },
             itemCount: dataList.length,
-            shrinkWrap: false,
           ),
         ),
       ),
     );
   }
 
-  Widget inforMation(item, int index){
+  Widget inforMation(item, int index) {
     return InkWell(
-
       child: Container(
         color: Colors.white,
         child: Text(
@@ -135,5 +128,4 @@ class _RefreshPageState extends State<RefreshPage> {
       ),
     );
   }
-
 }

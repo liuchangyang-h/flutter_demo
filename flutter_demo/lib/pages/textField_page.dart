@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/base/base_class.dart';
+import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/textField.dart';
 
@@ -9,21 +10,19 @@ class TextFieldPage extends StatefulWidget {
 }
 
 class _TextFieldPageState extends State<TextFieldPage> {
-
   TextEditingController _contentTf = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         BaseClass.closeKeyBorder();
       },
       child: Scaffold(
         appBar: MyAppBar(
           title: '输入框',
         ),
-        body: Container(
-          height: BaseClass.screenH,
-          color: BaseClass.kBackColor,
+        body: BGContainer(
           child: SingleChildScrollView(
             child: textField(),
           ),
@@ -36,14 +35,14 @@ class _TextFieldPageState extends State<TextFieldPage> {
   textField() {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-      height: 200,
+      height: BaseClass.setHeight(200),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       child: Container(
-        margin: EdgeInsets.only(left: 5,right: 5),
-        child:  MyTextField(
+        margin: EdgeInsets.only(left: 5, right: 5),
+        child: MyTextField(
           maxLines: null,
           maxLength: 600,
           controller: _contentTf,
