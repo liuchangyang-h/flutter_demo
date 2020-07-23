@@ -3,6 +3,8 @@ import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/tableView_cell.dart';
+import 'package:flutterdemo/router/navigator_util.dart';
+import 'package:flutterdemo/router/routes.dart';
 import 'city_page.dart';
 import 'prompt_page.dart';
 import 'refresh_page.dart';
@@ -71,15 +73,17 @@ class _IndexPageState extends State<IndexPage>
   void callBack(index) {
     print('点击了:${index}');
     if (index == 0) {
-      RoutePush.push(context, TextFieldPage());
+//      RoutePush.push(context, TextFieldPage());
+      NavigatorUtil.push(context, Routes.textField);
     } else if (index == 1) {
-      RoutePush.push(context, UploadPage());
+//      RoutePush.push(context, UploadPage());
+      NavigatorUtil.push(context, Routes.upload);
     } else if (index == 2) {
-      RoutePush.push(context, PromptPage());
+      NavigatorUtil.push(context, Routes.prompt);
     } else if (index == 3) {
-      RoutePush.push(context, RefreshPage());
+      NavigatorUtil.push(context, Routes.refresh);
     } else if (index == 4) {
-      RoutePush.push(context, CityPage());
+      NavigatorUtil.push(context, Routes.city);
     }
   }
 }

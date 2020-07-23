@@ -36,6 +36,10 @@ dependencies:
   flutter_screenutil: ^1.1.0
   #动态申请权限
   permission_handler: ^3.0.0
+  #加载框
+  flutter_easyloading: ^1.1.4
+  #路由跳转
+  fluro: ^1.6.3
   #保存图片到本地(ios注意看https://www.jianshu.com/p/a288b33cf03b)
   image_gallery_saver: ^1.5.0
   #图片预览放大滑动
@@ -46,8 +50,6 @@ dependencies:
   photo: ^0.4.8
   #视频
   video_player: ^0.10.11+2
-  #加载框
-  flutter_easyloading: ^1.1.4
   #城市选择
   city_pickers: ^0.1.30
 

@@ -15,4 +15,36 @@ class BaseExtend {
     }
     return false;
   }
+
+  ///List转String用逗号分隔
+  static String getStringFromString(List object) {
+    if (BaseExtend.isValue(object)) {
+      List tempList = List();
+      String str = '';
+      object.forEach((f) {
+        tempList.add(f);
+      });
+
+      tempList.forEach((f) {
+        if (str == '') {
+          str = "$f";
+        } else {
+          str = "$str" "," "$f";
+        }
+      });
+
+      return str;
+    }
+    return '';
+  }
+
+  ///String用逗号分隔转List
+  static List getStringFromList(String object) {
+    List list = new List();
+    if (BaseExtend.isValue(object)) {
+      list = object.split(',');
+      return list;
+    }
+    return list;
+  }
 }
