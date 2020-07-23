@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'base_refresh.dart';
+
 class BaseClass {
   /// mark ---------------------------------------- System ----------
   static final GlobalKey<NavigatorState> navigatorKey = new GlobalKey();
@@ -29,8 +31,25 @@ class BaseClass {
   /// 底部安全区
   static double kBottomSafeHeight = mediaQuery.padding.bottom;
 
-  static kFont(number) {
-    return ScreenUtil().setSp(number);
+  ///字体适配
+  static kFont(x) {
+    return ScreenUtil().setSp(x);
+  }
+
+  ///根据UI设计的设备宽度适配
+  static setWidth(x){
+    return ScreenUtil().setWidth(x);
+  }
+
+  ///根据UI设计的设备高度适配
+  static setHeight(x){
+    return ScreenUtil().setHeight(x);
+  }
+
+  ///关闭键盘
+  static closeKeyBorder() {
+    FocusScope.of(navigatorKey.currentState.overlay.context)
+        .requestFocus(FocusNode());
   }
 
   /// mark ---------------------------------------- App ----------
@@ -79,40 +98,7 @@ class BaseClass {
 
   /// mark ---------------------------------------- Refresh ----------
 
-  ///头部样式
-  header() {
-    return CustomHeader(
-      builder: (BuildContext context, RefreshStatus mode) {
-        print({'header': mode});
-        return Container(
-          height: 44.0,
-          child: Center(child: CupertinoActivityIndicator()),
-        );
-      },
-    );
-  }
+  static final PullToRefreshStyle pullToRefreshStyle = PullToRefreshStyle();
 
-  /// 底部样式
-  footer() {
-    return CustomFooter(
-      builder: (BuildContext context, LoadStatus mode) {
-        print({'footer': mode});
-        Widget body;
-        if (mode == LoadStatus.idle) {
-          body = Text(
-            '',
-            style: TextStyle(color: Colors.grey),
-          );
-        } else {
-          body = CupertinoActivityIndicator();
-        }
-        return Container(
-          height: 44.0,
-          child: Center(child: body),
-        );
-      },
-    );
-  }
-
- /// mark ---------------------------------------- End ----------
+  /// mark ---------------------------------------- End ----------
 }

@@ -10,16 +10,22 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final TextStyle titleStyle;
   final Color backgroundColor;
   final String backImgName;
+  final double backW;
+  final double backH;
   final bool isBack;
+  final Color backColors;
   MyAppBar({
     this.bottom,
     this.title,
     this.context,
     this.actions,
     this.titleStyle,
-    this.backgroundColor,
+    this.backgroundColor = BaseClass.kMainColor,
     this.backImgName,
+    this.backW = 9.0,
+    this.backH = 15.0,
     this.isBack: false,
+    this.backColors = Colors.white,
   });
   @override
   _MyAppBarState createState() => _MyAppBarState();
@@ -34,9 +40,12 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: new Text(
+      iconTheme: IconThemeData(
+        color: widget.backColors,
+      ),
+      title: Text(
         widget.title ?? 'title',
-        style: widget.titleStyle ?? new TextStyle(
+        style: widget.titleStyle ?? TextStyle(
           color: Colors.white,
           fontSize: BaseClass.kFont(17),
           fontWeight: FontWeight.bold,
@@ -45,18 +54,18 @@ class _MyAppBarState extends State<MyAppBar> {
 
       leading: widget.isBack ? FlatButton(
         child: Image(
-          image: new AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
-          width: 9,
-          height: 15,
+          image: AssetImage(widget.backImgName ?? Icons.arrow_back_ios),
+          width: BaseClass.setWidth(widget.backW),
+          height: BaseClass.setHeight(widget.backH),
         ),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ) : null,
-      backgroundColor: BaseClass.kMainColor,
+      backgroundColor: widget.backgroundColor,
       elevation: 0,
 
-      bottom: new AppBarBottom(
+      bottom: AppBarBottom(
         child: widget.bottom,
       ),
       actions: widget.actions,

@@ -3,12 +3,12 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterdemo/base/base_class.dart';
+import 'package:flutterdemo/base/base_extend.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-
-import 'loadWidget.dart';
 
 class ShowImage extends StatefulWidget {
   //数据源
@@ -71,8 +71,8 @@ class _ShowImageState extends State<ShowImage> {
           ),
           Positioned(
             //图片index显示
-            bottom: MediaQuery.of(context).padding.top + 15,
-            width: MediaQuery.of(context).size.width,
+            bottom: BaseClass.kTopSafeHeight + 15,
+            width: BaseClass.screenW,
             child: Center(
               child: Text("${curIndex + 1}/${widget.dataArr.length}",
                   style: TextStyle(color: Colors.white, fontSize: 16)),
@@ -81,7 +81,7 @@ class _ShowImageState extends State<ShowImage> {
           Positioned(
             //右上角关闭按钮
             right: 10,
-            top: MediaQuery.of(context).padding.top,
+            top: BaseClass.kTopSafeHeight,
             child: IconButton(
               icon: Icon(
                 Icons.close,
@@ -97,8 +97,8 @@ class _ShowImageState extends State<ShowImage> {
             bottom: 50,
             right: 20,
             child: Container(
-              width: 100,
-              height: 40,
+              width: BaseClass.setWidth(100),
+              height: BaseClass.setHeight(40),
               decoration: BoxDecoration(
                 color: BaseClass.kMainColor,
                 //设置四周圆角 角度
@@ -127,11 +127,11 @@ class _ShowImageState extends State<ShowImage> {
 
   Future<bool> requestPermission() async {
     final permissions =
-    await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
     if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
       return true;
     } else {
-      LoadWidget.showInfo(context, message: '需要存储权限');
+      EasyLoading.showInfo('需要存储权限');
       return false;
     }
   }
@@ -142,13 +142,12 @@ class _ShowImageState extends State<ShowImage> {
       var response = await Dio().get(dataArr[index],
           options: Options(responseType: ResponseType.bytes));
       final result =
-      await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
-      print(result);
-      if (result) {
-        LoadWidget.showInfo(context, message: '保存成功');
+          await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+      if (BaseExtend.isValue(result)) {
+        EasyLoading.showInfo('保存成功');
         Navigator.of(context).pop();
       } else {
-        LoadWidget.showInfo(context, message: '保存失败');
+        EasyLoading.showInfo('保存失败');
       }
     } else {
       if (await requestPermission()) {
@@ -156,12 +155,11 @@ class _ShowImageState extends State<ShowImage> {
             options: Options(responseType: ResponseType.bytes));
         final result = await ImageGallerySaver.saveImage(
             Uint8List.fromList(response.data));
-        print(result);
-        if (result.toString().length > 0) {
-          LoadWidget.showInfo(context, message: '保存成功');
+        if (BaseExtend.isValue(result)) {
+          EasyLoading.showInfo('保存成功');
           Navigator.of(context).pop();
         } else {
-          LoadWidget.showInfo(context, message: '保存失败');
+          EasyLoading.showInfo('保存失败');
         }
       }
     }
