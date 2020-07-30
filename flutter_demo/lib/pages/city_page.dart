@@ -37,7 +37,7 @@ class _CityPageState extends State<CityPage> {
   //位置信息
   locationInformation() {
     return Container(
-      margin: EdgeInsets.only(top: 20,left: 10,right: 10),
+      margin: EdgeInsets.only(top: 20, left: 10, right: 10),
       alignment: Alignment.center,
       width: BaseClass.screenW,
       color: Colors.white,

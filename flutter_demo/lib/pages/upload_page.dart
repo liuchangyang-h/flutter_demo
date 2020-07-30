@@ -383,27 +383,31 @@ class _UploadPageState extends State<UploadPage> {
   void getImageByGallery() async {
     this.fileImages.clear();
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (BaseExtend.isValue(image.path)) {
-      this.fileImages.clear();
-      setState(() {
-        this.type = 2;
-        this.fileImages.add(image.path);
-      });
+    if (BaseExtend.isValue(image)) {
+      if (BaseExtend.isValue(image.path)) {
+        this.fileImages.clear();
+        setState(() {
+          this.type = 2;
+          this.fileImages.add(image.path);
+        });
+      }
     }
   }
 
   void getVideo() async {
     File video = await ImagePicker.pickVideo(source: ImageSource.camera);
-    if (BaseExtend.isValue(video.path)) {
-      fileImages.clear();
-      _videoPlayerController = VideoPlayerController.file(video)
-        ..initialize().then((_) {
-          setState(() {
-            this.type = 3;
-            fileImages.add(video.path);
+    if (BaseExtend.isValue(video)) {
+      if (BaseExtend.isValue(video.path)) {
+        fileImages.clear();
+        _videoPlayerController = VideoPlayerController.file(video)
+          ..initialize().then((_) {
+            setState(() {
+              this.type = 3;
+              fileImages.add(video.path);
+            });
+            _videoPlayerController.pause();
           });
-          _videoPlayerController.pause();
-        });
+      }
     }
   }
 

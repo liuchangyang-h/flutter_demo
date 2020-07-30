@@ -74,6 +74,11 @@ class _IndexPageState extends State<IndexPage>
     print('点击了:${index}');
     if (index == 0) {
 //      RoutePush.push(context, TextFieldPage());
+      // Navigator.of(context).push(
+      //   FadeRoute(
+      //     page: TextFieldPage(),
+      //   ),
+      // );
       NavigatorUtil.push(context, Routes.textField);
     } else if (index == 1) {
 //      RoutePush.push(context, UploadPage());
