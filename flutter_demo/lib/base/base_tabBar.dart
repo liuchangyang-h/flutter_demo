@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterdemo/pages/index_page.dart';
 
 import 'base_class.dart';
@@ -10,7 +10,6 @@ class BaseTaBar extends StatefulWidget {
 }
 
 class _BaseTaBarState extends State<BaseTaBar> {
-
   int _tabIndex = 0;
   var tabImages;
   var appBarTitles = ['首页', '知识库', '快速提问', '交流', '我的'];
@@ -36,10 +35,12 @@ class _BaseTaBarState extends State<BaseTaBar> {
   Text getTabTitle(int curIndex) {
     if (curIndex == _tabIndex) {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: BaseClass.kFont(14), color: BaseClass.kMainColor));
+          style: new TextStyle(
+              fontSize: BaseClass.kFont(14), color: BaseClass.kMainColor));
     } else {
       return new Text(appBarTitles[curIndex],
-          style: new TextStyle(fontSize: BaseClass.kFont(14), color: const Color(0xff515151)));
+          style: new TextStyle(
+              fontSize: BaseClass.kFont(14), color: const Color(0xff515151)));
     }
   }
 
@@ -95,13 +96,18 @@ class _BaseTaBarState extends State<BaseTaBar> {
 
   @override
   Widget build(BuildContext context) {
-
     ///字体大小适配初始化
+    // ScreenUtil.init(
+    //   context,
+    //   width: BaseClass.screenW,
+    //   height: BaseClass.screenH,
+    //   allowFontScaling: false,
+    // );
     ScreenUtil.init(
-      context,
-      width: BaseClass.screenW,
-      height: BaseClass.screenH,
-      allowFontScaling: false,
+      BoxConstraints(
+        maxWidth: BaseClass.screenW,
+        maxHeight: BaseClass.screenH,
+      ),
     );
 
     //初始化数据
@@ -118,8 +124,7 @@ class _BaseTaBarState extends State<BaseTaBar> {
             _tabIndex = 2;
           });
         },
-        backgroundColor:
-        (_tabIndex == 2) ? BaseClass.kMainColor : Colors.white,
+        backgroundColor: (_tabIndex == 2) ? BaseClass.kMainColor : Colors.white,
         child: Image.asset(
           (_tabIndex == 2)
               ? 'images/tabbar/btn_put_selected-1.png'
@@ -150,4 +155,3 @@ class _BaseTaBarState extends State<BaseTaBar> {
     );
   }
 }
-

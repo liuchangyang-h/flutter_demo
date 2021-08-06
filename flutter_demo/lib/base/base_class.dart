@@ -1,8 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/screenutil.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'base_refresh.dart';
 
@@ -37,12 +36,12 @@ class BaseClass {
   }
 
   ///根据UI设计的设备宽度适配
-  static setWidth(x){
+  static setWidth(x) {
     return ScreenUtil().setWidth(x);
   }
 
   ///根据UI设计的设备高度适配
-  static setHeight(x){
+  static setHeight(x) {
     return ScreenUtil().setHeight(x);
   }
 
@@ -64,7 +63,7 @@ class BaseClass {
   static const kLineColor = Color(0xFFC1C1C1);
 
   ///基础线高
-  static double kLineHeight = 1.0 / ScreenUtil.pixelRatio;
+  static double kLineHeight = 1.0 / ScreenUtil().pixelRatio;
 
   ///网络默认图
   static const kImage = 'images/Placeholder.png';

@@ -4,7 +4,7 @@ class BaseExtend {
 
       @return （true：有值 false：空）
    */
-  static isValue(dynamic value) {
+  static isValue(Object value) {
     if (value == null) return false;
     if (value is String && value.length != 0 && value.isNotEmpty) {
       return true;

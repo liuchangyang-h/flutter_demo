@@ -3,7 +3,9 @@ import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/tableView_cell.dart';
-import 'package:flutterdemo/router/navigator_util.dart';
+import 'package:flutterdemo/router/BaseRouter.dart';
+import 'package:flutterdemo/router/NavigatorUtils.dart';
+import 'package:flutterdemo/router/UserInfo.dart';
 import 'package:flutterdemo/router/routes.dart';
 import 'city_page.dart';
 import 'prompt_page.dart';
@@ -37,6 +39,12 @@ class _IndexPageState extends State<IndexPage>
     },
     {
       'title': '城市选择',
+    },
+    {
+      'title': '地理位置',
+    },
+    {
+      'title': '测试页面',
     },
   ];
 
@@ -79,16 +87,23 @@ class _IndexPageState extends State<IndexPage>
       //     page: TextFieldPage(),
       //   ),
       // );
-      NavigatorUtil.push(context, Routes.textField);
+      NavigatorUtils.push(context, Routes.textField);
     } else if (index == 1) {
 //      RoutePush.push(context, UploadPage());
-      NavigatorUtil.push(context, Routes.upload);
+      NavigatorUtils.push(context, Routes.upload);
     } else if (index == 2) {
-      NavigatorUtil.push(context, Routes.prompt);
+      NavigatorUtils.push(context, Routes.prompt);
     } else if (index == 3) {
-      NavigatorUtil.push(context, Routes.refresh);
+      NavigatorUtils.push(context, Routes.refresh);
     } else if (index == 4) {
-      NavigatorUtil.push(context, Routes.city);
+      NavigatorUtils.push(context, Routes.city);
+    } else if (index == 5) {
+      NavigatorUtils.push(context, Routes.location);
+    } else if (index == 6) {
+      UserInfo userInfo = UserInfo();
+      userInfo.email = "xiaotimel@163.com";
+      userInfo.name = "猪猪";
+      NavigatorUtils.pushArgument(context, Routes.demo, userInfo);
     }
   }
 }

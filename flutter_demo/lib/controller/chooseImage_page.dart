@@ -66,7 +66,6 @@ class _ChooseImagePageState extends State<ChooseImagePage> {
                   );
                 },
                 itemCount: widget.dataList.length,
-                loadingChild: Container(),
                 backgroundDecoration: null,
                 pageController: widget.controller,
                 enableRotation: true,
@@ -135,9 +134,8 @@ class _ChooseImagePageState extends State<ChooseImagePage> {
   }
 
   Future<bool> requestPermission() async {
-    final permissions =
-        await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-    if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
+    var status = await Permission.sensors.status;
+    if (!status.isDenied) {
       return true;
     } else {
       EasyLoading.showInfo('需要存储权限');

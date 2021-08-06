@@ -11,7 +11,7 @@ import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 import 'package:flutterdemo/controller/upload_file.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:photo/photo.dart';
+// import 'package:photo/photo.dart';
 import 'package:video_player/video_player.dart';
 
 class UploadPage extends StatefulWidget {
@@ -365,7 +365,7 @@ class _UploadPageState extends State<UploadPage> {
         } else if (value == '视频') {
           getVideo();
         } else if (value == '多图选择') {
-          multipleChoice();
+          // multipleChoice();
         }
       }
     });
@@ -373,7 +373,7 @@ class _UploadPageState extends State<UploadPage> {
 
   void getImageByCamera() async {
     this.fileImages.clear();
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    var image = await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
       this.type = 1;
       this.fileImages.add(image.path);
@@ -382,7 +382,7 @@ class _UploadPageState extends State<UploadPage> {
 
   void getImageByGallery() async {
     this.fileImages.clear();
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (BaseExtend.isValue(image)) {
       if (BaseExtend.isValue(image.path)) {
         this.fileImages.clear();
@@ -395,11 +395,12 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   void getVideo() async {
-    File video = await ImagePicker.pickVideo(source: ImageSource.camera);
+    // File video = await ImagePicker().pickVideo(source: ImageSource.camera);
+    XFile video = await ImagePicker().pickVideo(source: ImageSource.camera);
     if (BaseExtend.isValue(video)) {
       if (BaseExtend.isValue(video.path)) {
         fileImages.clear();
-        _videoPlayerController = VideoPlayerController.file(video)
+        _videoPlayerController = VideoPlayerController.file(File(video.path))
           ..initialize().then((_) {
             setState(() {
               this.type = 3;
@@ -411,26 +412,26 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  void multipleChoice() async {
-    if (this.type != 4) {
-      fileImages.clear();
-    }
-    final result = await PhotoPicker.pickAsset(
-        context: context,
-        maxSelected: 9 - fileImages.length,
-        pickType: PickType.onlyImage);
+  // void multipleChoice() async {
+  //   if (this.type != 4) {
+  //     fileImages.clear();
+  //   }
+  //   final result = await PhotoPicker.pickAsset(
+  //       context: context,
+  //       maxSelected: 9 - fileImages.length,
+  //       pickType: PickType.onlyImage);
 
-    if (BaseExtend.isValue(result)) {
-      for (var e in result) {
-        var file = await e.file;
-        fileImages.add(file.path);
-      }
+  //   if (BaseExtend.isValue(result)) {
+  //     for (var e in result) {
+  //       var file = await e.file;
+  //       fileImages.add(file.path);
+  //     }
 
-      setState(() {
-        this.type = 4;
-      });
-    }
-  }
+  //     setState(() {
+  //       this.type = 4;
+  //     });
+  //   }
+  // }
 
   publishBtnClick() {
     urlImages.clear();
