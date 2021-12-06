@@ -1,4 +1,4 @@
 class UserInfo {
-  String name;
-  String email;
+  late String name;
+  late String email;
 }

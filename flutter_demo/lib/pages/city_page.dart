@@ -55,9 +55,9 @@ class _CityPageState extends State<CityPage> {
   reminder() {
     return Container(
       margin: EdgeInsets.only(top: 20),
-      child: RaisedButton(
+      child: TextButton(
         onPressed: () async {
-          Result tempResult = await CityPickers.showCityPicker(
+          Result? tempResult = await CityPickers.showCityPicker(
             context: context,
             height: BaseClass.setHeight(300),
           );
@@ -68,9 +68,7 @@ class _CityPageState extends State<CityPage> {
             result = tempResult;
           });
         },
-        child: Text(
-          '城市选择',
-        ),
+        child: Text('城市选择'),
       ),
     );
   }

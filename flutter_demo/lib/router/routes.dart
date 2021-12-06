@@ -67,7 +67,7 @@ class Routes extends IRouter {
         handler: Handler(handlerFunc: (_, __) => LocationPage()));
 
     router.define(demo, handler: Handler(handlerFunc: (context, params) {
-      final args = context.settings.arguments as UserInfo;
+      final args = context!.settings!.arguments as UserInfo;
       return LoginInfoPage(args);
     }));
   }

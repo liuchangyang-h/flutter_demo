@@ -5,7 +5,7 @@ class BGContainer extends StatefulWidget {
   /// 背景颜色
   final Color bgColor;
 
-  final Widget child;
+  final Widget? child;
 
   BGContainer({
     this.bgColor = BaseClass.kBackColor,

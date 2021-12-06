@@ -1,50 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
-import 'package:flutterdemo/controller/route_push.dart';
 import 'package:flutterdemo/controller/tableView_cell.dart';
-import 'package:flutterdemo/router/BaseRouter.dart';
 import 'package:flutterdemo/router/NavigatorUtils.dart';
 import 'package:flutterdemo/router/UserInfo.dart';
 import 'package:flutterdemo/router/routes.dart';
-import 'city_page.dart';
-import 'prompt_page.dart';
-import 'refresh_page.dart';
-import 'textField_page.dart';
-import 'upload_page.dart';
 
 class IndexPage extends StatefulWidget {
   @override
   _IndexPageState createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => false;
-
+class _IndexPageState extends State<IndexPage> {
   ///数组
   List aryArray = [
     {
       'title': '输入框',
+      'image': '',
     },
     {
       'title': '图片上传',
+      'image': '',
     },
     {
       'title': '弹出提示框',
+      'image': '',
     },
     {
       'title': '拉下刷新',
+      'image': '',
     },
     {
       'title': '城市选择',
+      'image': '',
     },
     {
       'title': '地理位置',
+      'image': '',
     },
     {
       'title': '测试页面',
+      'image': '',
     },
   ];
 

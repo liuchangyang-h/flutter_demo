@@ -20,16 +20,16 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  VideoPlayerController _videoPlayerController;
+  VideoPlayerController? _videoPlayerController;
 
   ///弹出选择（0默认不选，1表示相机、2表示单图相册、3表示录制视频、4表示多图相册）
   int type = 0;
 
   //存放本地路径
-  List fileImages = List();
+  List fileImages = [];
 
   //存放网络路径
-  List urlImages = List();
+  List urlImages = [];
 
   //用于定位图片上传位置
   int locationImg = 0;
@@ -154,8 +154,8 @@ class _UploadPageState extends State<UploadPage> {
               width: BaseClass.setWidth(BaseClass.screenW - 40),
               height: BaseClass.setHeight(150),
               child: AspectRatio(
-                aspectRatio: _videoPlayerController.value.aspectRatio,
-                child: VideoPlayer(_videoPlayerController),
+                aspectRatio: _videoPlayerController!.value.aspectRatio,
+                child: VideoPlayer(_videoPlayerController!),
               ),
             ),
             Positioned(
@@ -209,11 +209,16 @@ class _UploadPageState extends State<UploadPage> {
     return Container(
       height: BaseClass.setHeight(60),
       margin: EdgeInsets.only(top: 10),
-      child: RaisedButton(
+      decoration: BoxDecoration(
         color: BaseClass.kMainColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(5.0),
         ),
+      ),
+      child: TextButton(
+        onPressed: () {
+          // getItemPicture();
+        },
         child: Text(
           '拍照、录屏、多图选择及图片选择',
           style: TextStyle(
@@ -221,10 +226,6 @@ class _UploadPageState extends State<UploadPage> {
             fontSize: BaseClass.kFont(16),
           ),
         ),
-        onPressed: () {
-          print('点击了');
-          getItemPicture();
-        },
       ),
     );
   }
@@ -234,11 +235,17 @@ class _UploadPageState extends State<UploadPage> {
     return Container(
       height: BaseClass.setHeight(40),
       margin: EdgeInsets.only(top: 10),
-      child: RaisedButton(
+      decoration: BoxDecoration(
         color: BaseClass.kMainColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(5.0),
         ),
+      ),
+      child: TextButton(
+        onPressed: () {
+          urlImages.clear();
+          requestImageToken('interact/quickAsk/');
+        },
         child: Text(
           '发布图片或视频到OSS',
           style: TextStyle(
@@ -246,18 +253,13 @@ class _UploadPageState extends State<UploadPage> {
             fontSize: BaseClass.kFont(16),
           ),
         ),
-        onPressed: () {
-          print('点击了');
-          urlImages.clear();
-          requestImageToken('interact/quickAsk/');
-        },
       ),
     );
   }
 
   //图片
   List<Widget> getImagesist() {
-    List<Widget> widgetList = new List();
+    List<Widget> widgetList = [];
     for (int i = 0; i < fileImages.length; i++) {
       String string = fileImages[i];
       widgetList.add(showImageView(string, i));
@@ -309,81 +311,81 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  void getItemPicture() {
-    showDemoActionSheet(
-      context: context,
-      child: CupertinoActionSheet(
-        title: const Text('图片与视频'),
-        //message: const Text('Please select the best mode from the options below.'),
-        actions: <Widget>[
-          CupertinoActionSheetAction(
-            child: const Text('相机'),
-            onPressed: () {
-              Navigator.pop(context, '相机');
-            },
-          ),
-          CupertinoActionSheetAction(
-            child: const Text('相册'),
-            onPressed: () {
-              Navigator.pop(context, '相册');
-            },
-          ),
-          CupertinoActionSheetAction(
-            child: const Text('视频'),
-            onPressed: () {
-              Navigator.pop(context, '视频');
-            },
-          ),
-          CupertinoActionSheetAction(
-            child: const Text('多图选择'),
-            onPressed: () {
-              Navigator.pop(context, '多图选择');
-            },
-          ),
-        ],
-        cancelButton: CupertinoActionSheetAction(
-          child: const Text('取消'),
-          isDefaultAction: true,
-          onPressed: () {
-            Navigator.pop(context, '取消');
-          },
-        ),
-      ),
-    );
-  }
+  // void getItemPicture() {
+  //   showDemoActionSheet(
+  //     context: context,
+  //     child: CupertinoActionSheet(
+  //       title: const Text('图片与视频'),
+  //       //message: const Text('Please select the best mode from the options below.'),
+  //       actions: <Widget>[
+  //         CupertinoActionSheetAction(
+  //           child: const Text('相机'),
+  //           onPressed: () {
+  //             Navigator.pop(context, '相机');
+  //           },
+  //         ),
+  //         CupertinoActionSheetAction(
+  //           child: const Text('相册'),
+  //           onPressed: () {
+  //             Navigator.pop(context, '相册');
+  //           },
+  //         ),
+  //         CupertinoActionSheetAction(
+  //           child: const Text('视频'),
+  //           onPressed: () {
+  //             Navigator.pop(context, '视频');
+  //           },
+  //         ),
+  //         CupertinoActionSheetAction(
+  //           child: const Text('多图选择'),
+  //           onPressed: () {
+  //             Navigator.pop(context, '多图选择');
+  //           },
+  //         ),
+  //       ],
+  //       cancelButton: CupertinoActionSheetAction(
+  //         child: const Text('取消'),
+  //         isDefaultAction: true,
+  //         onPressed: () {
+  //           Navigator.pop(context, '取消');
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  void showDemoActionSheet({BuildContext context, Widget child}) {
-    showCupertinoModalPopup<String>(
-      context: context,
-      builder: (BuildContext context) => child,
-    ).then((String value) {
-      if (value != null) {
-        if (value == "相机") {
-          getImageByCamera();
-        } else if (value == "相册") {
-          getImageByGallery();
-        } else if (value == '视频') {
-          getVideo();
-        } else if (value == '多图选择') {
-          // multipleChoice();
-        }
-      }
-    });
-  }
+  // void showDemoActionSheet({BuildContext context, Widget child}) {
+  //   showCupertinoModalPopup<String>(
+  //     context: context,
+  //     builder: (BuildContext context) => child,
+  //   ).then((String value) {
+  //     if (value != null) {
+  //       if (value == "相机") {
+  //         getImageByCamera();
+  //       } else if (value == "相册") {
+  //         getImageByGallery();
+  //       } else if (value == '视频') {
+  //         getVideo();
+  //       } else if (value == '多图选择') {
+  //         // multipleChoice();
+  //       }
+  //     }
+  //   });
+  // }
 
   void getImageByCamera() async {
     this.fileImages.clear();
     var image = await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
       this.type = 1;
-      this.fileImages.add(image.path);
+      this.fileImages.add(image!.path);
     });
   }
 
   void getImageByGallery() async {
     this.fileImages.clear();
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (BaseExtend.isValue(image)) {
+    if (BaseExtend.isValue(image!)) {
       if (BaseExtend.isValue(image.path)) {
         this.fileImages.clear();
         setState(() {
@@ -396,8 +398,8 @@ class _UploadPageState extends State<UploadPage> {
 
   void getVideo() async {
     // File video = await ImagePicker().pickVideo(source: ImageSource.camera);
-    XFile video = await ImagePicker().pickVideo(source: ImageSource.camera);
-    if (BaseExtend.isValue(video)) {
+    XFile? video = await ImagePicker().pickVideo(source: ImageSource.camera);
+    if (BaseExtend.isValue(video!)) {
       if (BaseExtend.isValue(video.path)) {
         fileImages.clear();
         _videoPlayerController = VideoPlayerController.file(File(video.path))
@@ -406,7 +408,7 @@ class _UploadPageState extends State<UploadPage> {
               this.type = 3;
               fileImages.add(video.path);
             });
-            _videoPlayerController.pause();
+            _videoPlayerController!.pause();
           });
       }
     }
@@ -460,41 +462,41 @@ class _UploadPageState extends State<UploadPage> {
             today.day.toString() +
             '/',
       },
-      (int code, String message, Object data) async {
-        if (code == BaseNetWork.kCodeSuccess) {
-          UploadFile.requestOssUrl(
-            filePath,
-            data,
-            (int code, String message, String data) {
-              if (code == BaseNetWork.kCodeSuccess) {
-                urlImages.add(data);
-                if (urlImages.length == fileImages.length) {
-                  print('结束');
-                  print('打印出来看看网络地址:${urlImages}');
-                  EasyLoading.showSuccess('上传成功！');
-                } else {
-                  locationImg = locationImg + 1;
-                  requestImageToken(dir);
-                }
-              } else {
-                if (urlImages.length == fileImages.length) {
-                  print('结束');
-                  print('打印出来看看网络地址:${urlImages}');
-                  EasyLoading.showSuccess('上传成功！');
-                } else {
-                  locationImg = locationImg + 1;
-                  requestImageToken(dir);
-                }
-              }
-            },
-            (error) {
-              locationImg = locationImg;
-              requestImageToken(dir);
-            },
-          );
-        } else {
-          EasyLoading.showInfo(message);
-        }
+      (code, message, data) async {
+        // if (code == BaseNetWork.kCodeSuccess) {
+        //   UploadFile.requestOssUrl(
+        //     filePath,
+        //     data,
+        //     (int code, String message, String data) {
+        //       if (code == BaseNetWork.kCodeSuccess) {
+        //         urlImages.add(data);
+        //         if (urlImages.length == fileImages.length) {
+        //           print('结束');
+        //           print('打印出来看看网络地址:${urlImages}');
+        //           EasyLoading.showSuccess('上传成功！');
+        //         } else {
+        //           locationImg = locationImg + 1;
+        //           requestImageToken(dir);
+        //         }
+        //       } else {
+        //         if (urlImages.length == fileImages.length) {
+        //           print('结束');
+        //           print('打印出来看看网络地址:${urlImages}');
+        //           EasyLoading.showSuccess('上传成功！');
+        //         } else {
+        //           locationImg = locationImg + 1;
+        //           requestImageToken(dir);
+        //         }
+        //       }
+        //     },
+        //     (error) {
+        //       locationImg = locationImg;
+        //       requestImageToken(dir);
+        //     },
+        //   );
+        // } else {
+        //   EasyLoading.showInfo(message);
+        // }
       },
       (error) {
         EasyLoading.showError('网络请求失败');

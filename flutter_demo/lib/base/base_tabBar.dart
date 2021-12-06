@@ -64,10 +64,10 @@ class _BaseTaBarState extends State<BaseTaBar> {
         getTabImage('images/tabbar/btn_knowledge_normal-1.png'),
         getTabImage('images/tabbar/btn_knowledge_selected.png')
       ],
-      [
-        getTabImage('images/tabbar/btn_put_normal-1.png'),
-        getTabImage('images/tabbar/btn_put_selected-1.png')
-      ],
+      // [
+      //   getTabImage('images/tabbar/btn_put_normal-1.png'),
+      //   getTabImage('images/tabbar/btn_put_selected-1.png')
+      // ],
       [
         getTabImage('images/tabbar/btn_communication_normal-1.png'),
         getTabImage('images/tabbar/btn_communication_selected-1.png')
@@ -96,20 +96,6 @@ class _BaseTaBarState extends State<BaseTaBar> {
 
   @override
   Widget build(BuildContext context) {
-    ///字体大小适配初始化
-    // ScreenUtil.init(
-    //   context,
-    //   width: BaseClass.screenW,
-    //   height: BaseClass.screenH,
-    //   allowFontScaling: false,
-    // );
-    ScreenUtil.init(
-      BoxConstraints(
-        maxWidth: BaseClass.screenW,
-        maxHeight: BaseClass.screenH,
-      ),
-    );
-
     //初始化数据
     initData();
 
@@ -118,33 +104,38 @@ class _BaseTaBarState extends State<BaseTaBar> {
         index: _tabIndex,
         children: _pageList,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _tabIndex = 2;
-          });
-        },
-        backgroundColor: (_tabIndex == 2) ? BaseClass.kMainColor : Colors.white,
-        child: Image.asset(
-          (_tabIndex == 2)
-              ? 'images/tabbar/btn_put_selected-1.png'
-              : 'images/tabbar/btn_put_normal-1.png',
-          fit: BoxFit.cover,
-        ),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: getTabIcon(0), title: getTabTitle(0)),
-          BottomNavigationBarItem(icon: getTabIcon(1), title: getTabTitle(1)),
-          BottomNavigationBarItem(icon: getTabIcon(2), title: getTabTitle(2)),
-          BottomNavigationBarItem(icon: getTabIcon(3), title: getTabTitle(3)),
-          BottomNavigationBarItem(icon: getTabIcon(4), title: getTabTitle(4)),
+          BottomNavigationBarItem(
+            icon: getTabIcon(0),
+            label: this.appBarTitles[0],
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: getTabIcon(1),
+            label: this.appBarTitles[1],
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: getTabIcon(2),
+            label: this.appBarTitles[2],
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: getTabIcon(3),
+            label: this.appBarTitles[4],
+            tooltip: '',
+          ),
         ],
         type: BottomNavigationBarType.fixed,
-        fixedColor: Theme.of(context).primaryColor,
+        fixedColor: BaseClass.kMainColor,
         //默认选中首页
         currentIndex: _tabIndex,
+        backgroundColor: Colors.white,
+        unselectedItemColor: Color(0xFFCED4F2),
+        unselectedFontSize: 12,
+        selectedFontSize: 12,
         //点击事件
         onTap: (index) {
           setState(() {
@@ -153,5 +144,45 @@ class _BaseTaBarState extends State<BaseTaBar> {
         },
       ),
     );
+    // return Scaffold(
+    //   body: IndexedStack(
+    //     index: _tabIndex,
+    //     children: _pageList,
+    //   ),
+    //   floatingActionButton: FloatingActionButton(
+    //     onPressed: () {
+    //       setState(() {
+    //         _tabIndex = 2;
+    //       });
+    //     },
+    //     backgroundColor: (_tabIndex == 2) ? BaseClass.kMainColor : Colors.white,
+    //     child: Image.asset(
+    //       (_tabIndex == 2)
+    //           ? 'images/tabbar/btn_put_selected-1.png'
+    //           : 'images/tabbar/btn_put_normal-1.png',
+    //       fit: BoxFit.cover,
+    //     ),
+    //   ),
+    //   floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    //   bottomNavigationBar: BottomNavigationBar(
+    //     items: <BottomNavigationBarItem>[
+    //       BottomNavigationBarItem(icon: getTabIcon(0), title: getTabTitle(0)),
+    //       BottomNavigationBarItem(icon: getTabIcon(1), title: getTabTitle(1)),
+    //       BottomNavigationBarItem(icon: getTabIcon(2), title: getTabTitle(2)),
+    //       BottomNavigationBarItem(icon: getTabIcon(3), title: getTabTitle(3)),
+    //       BottomNavigationBarItem(icon: getTabIcon(4), title: getTabTitle(4)),
+    //     ],
+    //     type: BottomNavigationBarType.fixed,
+    //     fixedColor: Theme.of(context).primaryColor,
+    //     //默认选中首页
+    //     currentIndex: _tabIndex,
+    //     //点击事件
+    //     onTap: (index) {
+    //       setState(() {
+    //         _tabIndex = index;
+    //       });
+    //     },
+    //   ),
+    // );
   }
 }

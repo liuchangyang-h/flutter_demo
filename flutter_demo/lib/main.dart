@@ -1,25 +1,17 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutterdemo/pages/city_page.dart';
-import 'package:flutterdemo/pages/index_page.dart';
-import 'package:flutterdemo/pages/location_page.dart';
-import 'package:flutterdemo/pages/prompt_page.dart';
-import 'package:flutterdemo/pages/refresh_page.dart';
-import 'package:flutterdemo/pages/textField_page.dart';
-import 'package:flutterdemo/pages/upload_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutterdemo/router/BaseRouter.dart';
-import 'package:flutterdemo/router/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'base/base_class.dart';
 import 'base/base_tabBar.dart';
-import 'controller/navigation.dart';
-import 'controller/notification.dart';
 
 void main() {
   realRunApp();
   configLoading();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 }
 
 void configLoading() {
@@ -44,25 +36,16 @@ void realRunApp() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SpUtil.getInstance();
   runApp(MyApp());
-
-  ///注册fluro
-  // Router router = Router();
-
-  // ///绑定
-  // Routes.configureRoutes(router);
-
-  // ///全局赋值
-  // Application.router = router;
 }
 
 class SpUtil {
-  static SharedPreferences token;
-  static SharedPreferences userId;
-  static SharedPreferences userInfo;
-  static SharedPreferences deviceToken;
-  static SharedPreferences isHadInstall;
+  static SharedPreferences? token;
+  static SharedPreferences? userId;
+  static SharedPreferences? userInfo;
+  static SharedPreferences? deviceToken;
+  static SharedPreferences? isHadInstall;
 
-  static Future<String> getInstance() async {
+  static Future<void> getInstance() async {
     userId = await SharedPreferences.getInstance();
 
     userInfo = await SharedPreferences.getInstance();
@@ -82,20 +65,40 @@ class MyApp extends StatelessWidget {
     BaseRouter.setRouter(FluroRouter());
     BaseRouter.registerConfigureRoutes(BaseRouter.getRouter());
   }
+  final easyload = EasyLoading.init();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: BaseClass.navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        platform: TargetPlatform.iOS,
-      ),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return ScreenUtilInit(
+      builder: () => MaterialApp(
+        navigatorKey: BaseClass.navigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          platform: TargetPlatform.iOS,
+          appBarTheme: AppBarTheme.of(context).copyWith(
+            // 方式1
+            brightness: Brightness.dark,
+          ),
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+        ),
 
-      ///初始化路由
-      onGenerateRoute: BaseRouter.getRouter().generator,
-      home: BaseTaBar(),
-      builder: EasyLoading.init(),
+        ///初始化路由
+        onGenerateRoute: BaseRouter.getRouter().generator,
+        home: BaseTaBar(),
+        builder: (context, widget) {
+          widget = easyload(context, widget);
+          widget = MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: widget,
+          );
+          return widget;
+        },
+      ),
     );
   }
 }

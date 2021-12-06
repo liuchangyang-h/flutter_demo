@@ -37,7 +37,7 @@ class TableViewCell extends StatelessWidget {
     this.callBack,
     this.item,
     this.isArrow: true,
-    this.index,
+    required this.index,
     this.height = 44.0,
     this.titleColor = Colors.black,
     this.titleFont = 15,
@@ -51,7 +51,7 @@ class TableViewCell extends StatelessWidget {
     return Container(
       child: InkWell(
         onTap: () {
-          if(isClick){
+          if (isClick) {
             this.callBack(this.index);
           }
         },
@@ -59,34 +59,37 @@ class TableViewCell extends StatelessWidget {
           width: BaseClass.screenW,
           height: BaseClass.setHeight(height),
           decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(
-                  width: BaseClass.kLineHeight, color: BaseClass.kLineColor),
-            ),
-          ),
+              // color: Colors.white,
+              // border: Border(
+              //   bottom: BorderSide(
+              //       width: BaseClass.kLineHeight, color: BaseClass.kLineColor),
+              // ),
+              ),
           child: Stack(
             children: <Widget>[
               Row(
                 children: <Widget>[
                   ///图片
-                  BaseExtend.isValue(item['image'])
+                  Container(
+                    width: 20,
+                  ),
+
+                  (BaseExtend.isValue(item['image']))
                       ? Container(
-                          margin:
-                              EdgeInsets.only(left: 5, top: 10, bottom: 10),
-                          height: BaseClass.setHeight(height - 10 * 2),
-                          width: BaseClass.setWidth(height - 10 * 2),
+                          margin: EdgeInsets.only(left: 5, top: 10, bottom: 10),
+                          height: 30,
+                          width: 30,
                           child: Image(
                             image: AssetImage(item['image']),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                         )
                       : Container(),
 
                   ///内容文字
                   Container(
-                    margin: EdgeInsets.only(left: 5),
                     alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(left: 20),
                     child: Text(
                       item['title'],
                       style: TextStyle(
@@ -99,12 +102,13 @@ class TableViewCell extends StatelessWidget {
               ),
               isArrow
                   ? Positioned(
-                      right: 10,
+                      right: 20,
                       child: Container(
                         height: BaseClass.setHeight(height),
                         child: Icon(
                           icon,
                           color: arrowColor,
+                          size: 16,
                         ),
                       ),
                     )

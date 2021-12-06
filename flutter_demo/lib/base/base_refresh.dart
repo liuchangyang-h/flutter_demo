@@ -7,8 +7,7 @@ class PullToRefreshStyle {
   /// 顶部样式
   header() {
     return CustomHeader(
-      builder: (BuildContext context, RefreshStatus mode) {
-        print({'header': mode});
+      builder: (context, mode) {
         return Container(
           height: 44.0,
           child: Center(child: CupertinoActivityIndicator()),
@@ -20,12 +19,12 @@ class PullToRefreshStyle {
   /// 底部样式
   footer() {
     return CustomFooter(
-      builder: (BuildContext context, LoadStatus mode) {
+      builder: (context, mode) {
         print({'footer': mode});
         Widget body;
         if (mode == LoadStatus.idle) {
           body = Text('');
-        }else {
+        } else {
           body = CupertinoActivityIndicator();
         }
         return Container(

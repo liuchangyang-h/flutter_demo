@@ -47,7 +47,7 @@ class BaseClass {
 
   ///关闭键盘
   static closeKeyBorder() {
-    FocusScope.of(navigatorKey.currentState.overlay.context)
+    FocusScope.of(navigatorKey.currentState!.overlay!.context)
         .requestFocus(FocusNode());
   }
 

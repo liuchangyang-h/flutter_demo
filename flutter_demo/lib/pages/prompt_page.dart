@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutterdemo/base/base_class.dart';
 import 'package:flutterdemo/controller/bg_container.dart';
 import 'package:flutterdemo/controller/navigation.dart';
 
@@ -30,64 +31,52 @@ class _PromptPageState extends State<PromptPage> {
         children: <Widget>[
           //show
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.show();
               },
-              child: Text(
-                'show',
-              ),
+              child: Text('show'),
             ),
           ),
           //showProgress
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.showProgress(0.3, status: 'downloading...');
               },
-              child: Text(
-                'downloading',
-              ),
+              child: Text('downloading'),
             ),
           ),
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.showSuccess('Great Success!');
               },
-              child: Text(
-                'Success',
-              ),
+              child: Text('Success'),
             ),
           ),
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.showError('Failed with Error');
               },
-              child: Text(
-                'Error',
-              ),
+              child: Text('Error'),
             ),
           ),
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.showInfo('Useful Information.');
               },
-              child: Text(
-                'Information',
-              ),
+              child: Text('Information'),
             ),
           ),
           Container(
-            child: RaisedButton(
+            child: TextButton(
               onPressed: () {
                 EasyLoading.showToast('Toast');
               },
-              child: Text(
-                'Toast',
-              ),
+              child: Text('Toast'),
             ),
           ),
         ],
