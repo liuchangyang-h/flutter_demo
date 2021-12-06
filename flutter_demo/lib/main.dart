@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutterdemo/base/logUtil.dart';
 import 'package:flutterdemo/router/BaseRouter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'base/base_class.dart';
@@ -100,5 +103,17 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  ///接受消息
+  Future<void> receiveRemoteMsg(msg) async {
+    Map<String, dynamic> infoMap;
+    if ((msg != null) && (msg != '')) {
+      infoMap = json.decode(msg);
+      /**
+       * type:
+       * -1:表示存储deviceToken
+       * */
+    }
   }
 }
