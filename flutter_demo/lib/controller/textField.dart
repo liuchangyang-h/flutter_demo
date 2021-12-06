@@ -6,32 +6,41 @@ class MyTextField extends StatefulWidget {
   final bool isLight;
 
   ///控制器，控制TextField文字
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /// 最大行数
-  final int maxLines;
+  final int? maxLines;
 
   /// 输入文本样式
-  final TextStyle style;
+  final TextStyle? style;
 
   /// 边框装饰
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
 
   /// 键盘类型(默认文本)
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
   /// 光标颜色
-  final Color cursorColor;
+  final Color? cursorColor;
 
   /// 是否隐藏内容，例如密码格式
   final bool obscureText;
 
   /// 是否自动对焦
   final bool autofocus;
+
   /// 验证及格式
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
+
   /// 允许输入的最大长度
-  final int maxLength;
+  final int? maxLength;
+
+  ///控制键盘动作
+  final TextInputAction? textInputAction;
+
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final VoidCallback? onEditingComplete;
 
   MyTextField({
     this.isLight: true,
@@ -45,6 +54,10 @@ class MyTextField extends StatefulWidget {
     this.autofocus: false,
     this.inputFormatters,
     this.maxLength,
+    this.textInputAction,
+    this.onSubmitted,
+    this.onChanged,
+    this.onEditingComplete,
   });
 
   @override
@@ -66,6 +79,10 @@ class _MyTextFieldState extends State<MyTextField> {
       autofocus: widget.autofocus,
       inputFormatters: widget.inputFormatters,
       maxLength: widget.maxLength,
+      textInputAction: widget.textInputAction,
+      onSubmitted: widget.onSubmitted,
+      onChanged: widget.onChanged,
+      onEditingComplete: widget.onEditingComplete,
     );
   }
 }

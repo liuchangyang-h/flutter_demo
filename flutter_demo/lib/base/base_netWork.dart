@@ -1,4 +1,3 @@
-
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:io';
@@ -22,26 +21,21 @@ class BaseNetWork {
       Map<String, Object> parameters,
       successBlock(int code, String message, Object data),
       errorBlock(error)) async {
-
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    int userId = SpUtil.userId.getInt(BaseClass.kLocal_UserId);
+    int? userId = SpUtil.userId!.getInt(BaseClass.kLocal_UserId);
 
-    String token = SpUtil.token.getString(BaseClass.kLocal_Token);
+    String? token = SpUtil.token!.getString(BaseClass.kLocal_Token);
 
-    String deveToken =
-    SpUtil.userInfo.getString(BaseClass.kLocal_DeviceToken);
+    String? deveToken =
+        SpUtil.userInfo!.getString(BaseClass.kLocal_DeviceToken);
 
     Map<String, dynamic> userInfo;
 
-    Object info = SpUtil.userInfo.getString(BaseClass.kLocal_UserInfo);
-
-    if ((info != null) && (info != '')) {
-      userInfo = json.decode(info);
-    }
+    String? info = SpUtil.userInfo!.getString(BaseClass.kLocal_UserInfo);
 
     Options options =
-    Options(headers: {HttpHeaders.authorizationHeader: token});
+        Options(headers: {HttpHeaders.authorizationHeader: token});
 
     //公共参数
     var params = Map<String, Object>();
@@ -57,13 +51,18 @@ class BaseNetWork {
     params["clientVer"] = packageInfo.version;
     //DeviceToken
     params["deviceToken"] =
-    (deveToken == null || deveToken == '') ? '0' : deveToken;
+        (deveToken == null || deveToken == '') ? '0' : deveToken;
     //时间戳
     params["timestamp"] = new DateTime.now().millisecondsSinceEpoch.toString();
     //用户id
     params["userId"] = (userId == 0 || userId == null) ? 0 : userId;
     //0:普通用戶,1:专家用户，2：OA用户
-    params['source'] = (userInfo == null) ? 0 : userInfo['source'];
+    if ((info != null) && (info != '')) {
+      userInfo = json.decode(info);
+      params['source'] = (userInfo == null) ? 0 : userInfo['source'];
+    } else {
+      params['source'] = 0;
+    }
 //    //用户唯一token
 //    params["token"] = token;
     //body
@@ -76,7 +75,7 @@ class BaseNetWork {
       Response response;
       Dio dio = new Dio();
       response =
-      await dio.post(url, queryParameters: paramsF, options: options);
+          await dio.post(url, queryParameters: paramsF, options: options);
       print("请求地址：" + url);
       print("请求参数：" + paramsF.toString());
       print("返回参数：" + response.toString());
@@ -95,5 +94,4 @@ class BaseNetWork {
       return errorBlock(error);
     }
   }
-
 }

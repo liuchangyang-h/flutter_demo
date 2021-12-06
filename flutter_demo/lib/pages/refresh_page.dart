@@ -62,21 +62,27 @@ class _RefreshPageState extends State<RefreshPage> {
   List dataList = [
     {
       'title': '输入框',
+      'image': '',
     },
     {
       'title': '图片上传',
+      'image': '',
     },
     {
       'title': '弹出提示框',
+      'image': '',
     },
     {
       'title': '拉下刷新',
+      'image': '',
     },
     {
       'title': '你好',
+      'image': '',
     },
     {
       'title': '不好',
+      'image': '',
     },
   ];
 
@@ -105,6 +111,7 @@ class _RefreshPageState extends State<RefreshPage> {
               return TableViewCell(
                 item: this.dataList[index],
                 isClick: false,
+                index: index,
               );
             },
             itemCount: dataList.length,

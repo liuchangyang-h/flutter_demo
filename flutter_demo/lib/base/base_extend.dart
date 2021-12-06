@@ -19,7 +19,7 @@ class BaseExtend {
   ///List转String用逗号分隔
   static String getStringFromString(List object) {
     if (BaseExtend.isValue(object)) {
-      List tempList = List();
+      List tempList = [];
       String str = '';
       object.forEach((f) {
         tempList.add(f);
@@ -40,7 +40,7 @@ class BaseExtend {
 
   ///String用逗号分隔转List
   static List getStringFromList(String object) {
-    List list = new List();
+    List list = [];
     if (BaseExtend.isValue(object)) {
       list = object.split(',');
       return list;
